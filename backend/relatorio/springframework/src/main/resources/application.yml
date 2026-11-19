@@ -35,10 +35,9 @@ event:
 
 service:
   gestao:
-    url: http://localhost:8082
+    url: ${GESTAO_URL:http://localhost:8082}
   login:
-    url: http://localhost:8081
+    url: ${LOGIN_URL:http://localhost:8081}
 
 server:
-  port: 8084
-
+  port: ${PORT:8084} 

@@ -29,5 +29,5 @@ event:
     exchange: produto-exchange
 
 server:
-  port: 8082
+  port: ${PORT:8082} 
 
