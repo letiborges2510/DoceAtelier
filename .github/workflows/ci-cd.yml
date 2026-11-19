@@ -46,3 +46,25 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build e push da imagem (amd64)
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          build-args: |
+            SERVICE=${{ matrix.service }}
+            JAR_DIR=${{ matrix.jar_dir }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/doce-${{ matrix.service }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/doce-${{ matrix.service }}:${{ github.sha }}
+
+      - name: Disparar deploy no Render
+        env:
+          HOOK: ${{ secrets[matrix.hook] }}
+        run: |
+          if [ -n "$HOOK" ]; then
+            curl -fsS -X POST "$HOOK"
+          else
+            echo "Hook do Render ainda nao cadastrado, pulando"
+          fi
