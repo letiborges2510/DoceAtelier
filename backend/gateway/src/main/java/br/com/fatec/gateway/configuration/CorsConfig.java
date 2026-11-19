@@ -11,10 +11,10 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.List;
 
 /**
- * O front-end React chama o gateway de outra origem, então o navegador exige
- * CORS. Como o login usa cookie HttpOnly (access_token), é obrigatório
- * allowCredentials(true) + origens explícitas (nunca "*" com credentials).
- * As origens vêm de app.cors.origins (variável APP_CORS_ORIGINS no Render).
+ * O front-end React chama o gateway de outra origem, entao o navegador exige
+ * CORS. Como o login usa cookie HttpOnly (access_token), e obrigatorio
+ * allowCredentials(true) + origens explicitas (nunca "*" com credentials).
+ * As origens vem de app.cors.origins (variavel APP_CORS_ORIGINS no Render).
  */
 @Configuration
 public class CorsConfig {
