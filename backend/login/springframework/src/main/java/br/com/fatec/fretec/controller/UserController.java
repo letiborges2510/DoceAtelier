@@ -64,7 +64,7 @@ public class UserController {
         ResponseCookie cookie = ResponseCookie.from(AuthController.ACCESS_TOKEN_COOKIE, token.value())
                 .httpOnly(true)
                 .secure(cookieSecure)
-                .sameSite("Strict")
+                .sameSite(cookieSecure ? "None" : "Strict")
                 .path("/")
                 .maxAge(jwtSecurity.getExpirationSeconds())
                 .build();
